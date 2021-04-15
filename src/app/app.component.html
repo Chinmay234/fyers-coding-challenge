@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>Flight Booking</h1>
+  <div class="search-bar">
+    <label for="source">Srouce</label>
+    <input [(ngModel)]="source" id="source" type="text" />
+    <label for="destination">Destination</label>
+    <input [(ngModel)]="dest" id="destination" type="text" />
+    <label for="when">When</label>
+    <input [(ngModel)]="when" id="when" type="text" />
+    <button (click)="search()" id="search_flights" type="button">
+      Search Flight
+    </button>
+  </div>
+  <div class="search-list">
+    <p *ngIf="!flightList?.length; else flightSection">Search for a flight!</p>
+    <ng-template #flightSection>
+      <div *ngFor="let flight of flightList" class="search-flight">
+        <div class="icon"></div>
+        <div class="details">
+          <h1>{{flight.departure}}</h1>
+          <p>{{flight.company}}</p>
+        </div>
+        <div class="duration">
+          <h1>{{flight.duration}}</h1>
+          <p>{{flight.source.key}}-{{flight.destination.key}}</p>
+        </div>
+        <div class="price">
+          <h1>
+            {{flight.price}}
+          </h1>
+          <button (click)="bookFlight()">Booknow</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<div *ngIf="bookClicked" class="booknow-frm">
+  <div class="container">
+    <div>
+      Your details
+    </div>
+
+    <input placeholder="your name" id="name" type="text" />
+
+    <input placeholder="your email" id="email" type="text" />
+    <button (click)="bookFlight()" type="button">Confirm Booking</button>
+    <button (click)="cancelBooking()" type="button">Cancel</button>
+  </div>
+</div>
